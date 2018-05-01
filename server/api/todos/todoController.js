@@ -13,13 +13,20 @@ let addTodo = (req, res, next) => {
     //to hydrate (via populate('user') where user is the key that points to the user id in the todo model) 
     //the todo object (grab the user whose id is saved in the todo object) 
     //when we request the todo. Basically, this joins the documents at execution time.
+    
+    // Either update methods below work
+
     //check http://mongoosejs.com/docs/populate.html
-    User.findById(req.body.user, (err, user) => {
-      if (err) return errorHandler(err, next);
+    // User.findById(req.body.user, (err, user) => {
+    //   if (err) return errorHandler(err, next);
       
-      // check http://mongoosejs.com/docs/populate.html#refs-to-children
-      user.todos.push(todo);
-      user.save();
+    //   // check http://mongoosejs.com/docs/populate.html#refs-to-children
+    //   user.todos.push(todo);
+    //   user.save();
+    // });
+
+    User.findOneAndUpdate({_id: req.body.user}, {$push: {todos: todo}}, (err, user) => {
+      if (err) return errorHandler(err, next);
     });
 
     res.json(todo);

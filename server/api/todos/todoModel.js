@@ -14,6 +14,10 @@ const Todo = new Schema({
     type: Schema.Types.ObjectId, 
     ref: 'User',
     required: 'A todo must have a user.'
+  },
+  created_date: {
+    type: Date,
+    default: Date.now 
   }
 });
 

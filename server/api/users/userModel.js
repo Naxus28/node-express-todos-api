@@ -11,6 +11,10 @@ const User = new Schema({
     required: 'User must have a last name'
   },
   age: Number,
+  created_date: {
+    type: Date,
+    default: Date.now 
+  },
   todos: [{
     type: Schema.Types.ObjectId,
     ref: 'Todo'

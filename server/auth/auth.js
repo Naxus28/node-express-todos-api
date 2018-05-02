@@ -89,7 +89,6 @@ const signToken = id => jwt.sign(
 const errorHandler = (err, next) => next(new Error(err));
 
 
-
 export {
   decodeToken,
   getFreshUser,

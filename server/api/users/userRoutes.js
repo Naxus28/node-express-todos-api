@@ -6,9 +6,11 @@ import {
   deleteUser,
   getUser,
   getUsers,
-  updateUser
+  updateUser,
+  userParam
 } from './userController';
 
+router.param('id', userParam)
 
 router.route('/')
   .get(getUsers)

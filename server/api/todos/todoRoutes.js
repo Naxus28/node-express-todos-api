@@ -4,10 +4,13 @@ import {
   getTodo,
   getTodos,
   updateTodo,
-  deleteTodo
+  deleteTodo,
+  todoParam
 } from './todoController';
 
 const router = express.Router();
+
+router.param('id', todoParam);
 
 router.route('/')
   .get(getTodos)

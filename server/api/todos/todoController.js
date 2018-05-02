@@ -1,5 +1,24 @@
+import colors from 'colors';
 import Todo from './todoModel';
 import User from '../users/userModel';
+
+// this function will be passed
+// into the 'route.param' middleware
+// its goal is to append the found todo to the 'req' object
+// so we can get the todo were we need it (all routes that use path /:id)
+// check: https://expressjs.com/en/api.html#app.param
+let todoParam = (req, res, next, id) => { 
+  Todo.findById(id, (err, todo) => {
+    if (err) {
+      return errorHandler(err, next);
+    } else if (todo) {
+      req.todo = todo;
+      next();
+    } else {
+      return errorHandler('Failed to load todo', next);
+    }
+  })
+};
 
 let addTodo = (req, res, next) => {
   let newTodo = new Todo(req.body);
@@ -34,12 +53,16 @@ let addTodo = (req, res, next) => {
 };
 
 let getTodo = (req, res, next) => {
+  // req.todo is available here because we found the todo on router.param('id')
+  console.log('*req.todo*: '.green, req.todo); 
+
   Todo.findById(req.params.id)
     // the name in populate() is the property created in the todo model('user'), 
     // not the name given to the user model object ('User')
+    // check http://mongoosejs.com/docs/populate.html
+    // check https://medium.com/@nicknauert/mongooses-model-populate-b844ae6d1ee7
     .populate('user') 
     .exec((err, todo) => {
-      console.log('todo: ', todo);
       if (err) return errorHandler(err, next);
       res.json(todo);
     });
@@ -79,6 +102,7 @@ export {
   getTodo,
   getTodos,
   updateTodo,
-  deleteTodo
+  deleteTodo,
+  todoParam
 };
 

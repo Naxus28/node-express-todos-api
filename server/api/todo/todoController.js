@@ -44,7 +44,7 @@ let addTodo = (req, res, next) => {
     //   user.save();
     // });
 
-    User.findOneAndUpdate({_id: req.body.user}, {$push: {todos: todo}}, (err, user) => {
+    User.findOneAndUpdate({_id: req.body.user}, {$push: {todos: todo._id}}, (err, user) => {
       if (err) return errorHandler(err, next);
     });
 

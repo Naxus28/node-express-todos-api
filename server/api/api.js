@@ -1,5 +1,5 @@
-import userRoutes from './users/userRoutes';
-import todoRoutes from './todos/todoRoutes';
+import userRoutes from './user/userRoutes';
+import todoRoutes from './todo/todoRoutes';
 
 export default (app) => {
   app.use('/users', userRoutes);

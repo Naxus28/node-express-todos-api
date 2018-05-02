@@ -10,7 +10,12 @@ const config = {
   dev: 'development',
   test: 'testing',
   prod: 'production',
-  port: process.env.PORT || 3000
+  port: process.env.PORT || 3000,
+  // about 10 days in minutes
+  expireTime: 24 * 60 * 10,
+  secrets: {
+    jwt: process.env.JWT || 'gumball'
+  }
 };
 
 // set node env and config.env based on node env

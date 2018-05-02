@@ -66,10 +66,10 @@ const verifyUser = (req, res, next) => {
       if (!user.authenticate(password)) {
         res.status(401).send('Wrong password');
       } else {
-        // if everything is good,
-        // then attach to req.user
-        // and call next so the controller
-        // can sign a token from the req.user._id
+        // add user to the req obj and call next 
+        // so the controller's 'signin' function has access to req.user._id
+        // and is able to sign the token and send it back to the user
+        // this is the signin route: router.post('/signin', verifyUser, signin); 
         req.user = user;
         next();
       }

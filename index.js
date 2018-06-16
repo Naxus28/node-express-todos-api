@@ -12,8 +12,8 @@ const app = express();
 
 mongoose.connect(config.db.url)
   .then(
-    conn => 'Mongoose connected',
-    err => `Mongoose error: ${err}`
+    conn => console.log('Mongoose connected'),
+    err => console.log(`Mongoose error: ${err}`)
   );
 
 appMiddleware(app);

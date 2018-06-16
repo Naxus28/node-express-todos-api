@@ -92,7 +92,7 @@ let deleteTodo = (req, res, next) => {
     .exec((err, todos) => {
       if (err) return errorHandler(err, next);
       res.json(todos);
-    });;
+    });
 };
 
 const errorHandler = (err, next) => next(new Error(err));

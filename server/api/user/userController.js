@@ -16,6 +16,7 @@ let userParam = (req, res, next, id) => {
 
 const getUsers = (req, res, next) => {
   User.find({})
+    .select('-password') // removes password from returned query
     .populate('todos')
     .exec((err, user) => {
       if (err) return errorHandler(err, next);

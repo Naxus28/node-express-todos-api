@@ -46,7 +46,7 @@ User.methods = {
   // salt and hash the password
   encryptPassword(plainTextPword) {
     if (!plainTextPword) {
-      return ''
+      return '';
     } else {
       const salt = bcrypt.genSaltSync(10); // salt password
       return bcrypt.hashSync(plainTextPword, salt); // hash salted password

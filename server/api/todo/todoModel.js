@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const Todo = new Schema({
   item: {
     type: String,
-    required: 'Todo item is required'
+    required: 'Todo item is required',
+    unique: true,
   },
   completed: {
     type: Boolean,
